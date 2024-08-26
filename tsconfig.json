@@ -1,0 +1,19 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "module": "ESNext", // or "NodeNext"
+    "moduleResolution": "Bundler", //  or "NodeNext"
+    "noUncheckedIndexedAccess": true // 型の安全性が向上します。
+  },
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ]
+}
