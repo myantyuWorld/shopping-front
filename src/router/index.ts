@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import IndexPage from "@/features/categories/routes/IndexPage.vue";
-import { PublicLayout } from "@/components/layout";
-import TodoListPage from "@/features/todo/list/TodoListPage.vue";
+import { PublicLayout, PrivateLayout } from "@/components/layout";
+import { LoginPage } from "@/features/login";
+import { CategoryPage } from "@/features/categories";
+import { TodoListPage } from "@/features/todo/list";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
-      name: "home",
-      component: HomeView,
+      name: "login",
+      component: LoginPage,
       meta: {
         layout: PublicLayout
       }
@@ -18,9 +18,9 @@ const router = createRouter({
     {
       path: "/category",
       name: "category",
-      component: IndexPage,
+      component: CategoryPage,
       meta: {
-        layout: PublicLayout
+        layout: PrivateLayout
       }
     },
     {
@@ -28,9 +28,9 @@ const router = createRouter({
       name: "todo",
       component: TodoListPage,
       meta: {
-        layout: PublicLayout
+        layout: PrivateLayout
       }
-    }
+    },
   ]
 });
 
