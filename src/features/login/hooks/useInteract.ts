@@ -12,7 +12,7 @@ export const useInteract = () => {
   const onClickSignIn = handleSubmit(async (body) => {
     const { error } = await client.POST("/normal/login", { body })
     if (error) {
-      // TODO : 現状、alertにしているが、コールバック関数渡して、errorMessageを設定するか、モーダル出すか良しなにできるように数r
+      // TODO : 現状、alertにしているが、コールバック関数渡して、errorMessageを設定するか、モーダル出すか良しなにできるようにする
       // この辺りは、細かいデザインが決まってないので後からにする
       handleSubmitError(error)
     }
