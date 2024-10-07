@@ -85,7 +85,5 @@ defineOptions({ inheritAttrs: false, name: "PublicLayout" });
 </template>
 
 <style scoped>
-.body {
-  margin-left: 250px;
-}
+
 </style>
