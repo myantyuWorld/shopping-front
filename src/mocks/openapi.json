@@ -34,9 +34,6 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/GetMe"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
           }
         }
       }
@@ -162,9 +159,6 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/GetCategories"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
           }
         }
       },
@@ -194,9 +188,6 @@
           },
           "401": {
             "description": "Authorization information is missing or invalid."
-          },
-          "5XX": {
-            "description": "Unexpected error."
           }
         }
       }
@@ -241,9 +232,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "5XX": {
-            "description": "Unexpected error."
           }
         }
       },
@@ -272,9 +260,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "5XX": {
-            "description": "Unexpected error."
           }
         }
       }
@@ -319,9 +304,6 @@
           },
           "401": {
             "description": "Authorization information is missing or invalid."
-          },
-          "5XX": {
-            "description": "Unexpected error."
           }
         }
       },
@@ -358,9 +340,6 @@
           },
           "401": {
             "description": "Authorization information is missing or invalid."
-          },
-          "5XX": {
-            "description": "Unexpected error."
           }
         }
       }
@@ -443,9 +422,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "5XX": {
-            "description": "Unexpected error."
           }
         }
       },
@@ -505,9 +481,6 @@
           },
           "401": {
             "description": "Authorization information is missing or invalid."
-          },
-          "5XX": {
-            "description": "Unexpected error."
           }
         }
       },
@@ -553,9 +526,6 @@
           },
           "401": {
             "description": "Authorization information is missing or invalid."
-          },
-          "5XX": {
-            "description": "Unexpected error."
           }
         }
       }

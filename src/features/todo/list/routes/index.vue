@@ -8,7 +8,6 @@ const { categories } = useCategoryInteract()
 
 </script>
 <template>
-  <h2 class="md:text-3xl font-semibold text-gray-900 dark:text-white">Todo</h2>
   <div class="md:grid md:grid-cols-4">
     <div class="md:p-2.5">
       <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">カテゴリ</label>

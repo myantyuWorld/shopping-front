@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, provide } from "vue";
 import { RouterView, useRoute } from "vue-router";
 
 const route = useRoute();
 const layout = computed(() => route.meta.layout);
+
+provide('message', 'hello')
 </script>
 <!-- from cdn -->
 

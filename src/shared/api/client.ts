@@ -4,7 +4,7 @@ import * as v1Schema from "./v1.schema";
 /**
  * @see {@link https://openapi-ts.pages.dev/openapi-fetch}
  */
-const baseUrl: string = "http://localhost:5173/";
+const baseUrl: string = "http://localhost:5174/";
 
 // const authMiddleware: Middleware = {
 //   onRequest: async (req) => {

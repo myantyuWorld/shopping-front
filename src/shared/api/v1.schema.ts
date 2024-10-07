@@ -28,7 +28,6 @@ export interface paths {
             requestBody?: never;
             responses: {
                 200: components["responses"]["GetMe"];
-                500: components["responses"]["InternalServerError"];
             };
         };
         put?: never;
@@ -293,7 +292,6 @@ export interface paths {
             requestBody?: never;
             responses: {
                 200: components["responses"]["GetCategories"];
-                500: components["responses"]["InternalServerError"];
             };
         };
         put?: never;
@@ -326,13 +324,6 @@ export interface paths {
                 };
                 /** @description Authorization information is missing or invalid. */
                 401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unexpected error. */
-                "5XX": {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -397,13 +388,6 @@ export interface paths {
                     };
                     content?: never;
                 };
-                /** @description Unexpected error. */
-                "5XX": {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
             };
         };
         post?: never;
@@ -439,13 +423,6 @@ export interface paths {
                 };
                 /** @description Not Found */
                 404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unexpected error. */
-                "5XX": {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -491,13 +468,6 @@ export interface paths {
                     };
                     content?: never;
                 };
-                /** @description Unexpected error. */
-                "5XX": {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
             };
         };
         put?: never;
@@ -534,13 +504,6 @@ export interface paths {
                 };
                 /** @description Authorization information is missing or invalid. */
                 401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unexpected error. */
-                "5XX": {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -651,13 +614,6 @@ export interface paths {
                     };
                     content?: never;
                 };
-                /** @description Unexpected error. */
-                "5XX": {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
             };
         };
         post?: never;
@@ -747,13 +703,6 @@ export interface paths {
                     };
                     content?: never;
                 };
-                /** @description Unexpected error. */
-                "5XX": {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
             };
         };
         put?: never;
@@ -795,13 +744,6 @@ export interface paths {
                 };
                 /** @description Authorization information is missing or invalid. */
                 401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unexpected error. */
-                "5XX": {
                     headers: {
                         [name: string]: unknown;
                     };
