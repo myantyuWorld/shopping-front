@@ -21,6 +21,14 @@ const next = () => {
 };
 
 export const handlers = [
+  http.get(`${baseURL}/me`, async () => {
+    const resultArray = [
+      [await getGetMe200Response(), { status: 200 }],
+      [await getGetMe500Response(), { status: 500 }],
+    ];
+
+    return HttpResponse.json(...resultArray[next() % resultArray.length]);
+  }),
   http.post(`${baseURL}/signup`, async () => {
     const resultArray = [
       [undefined, { status: 200 }],
@@ -138,7 +146,40 @@ export const handlers = [
 
     return HttpResponse.json(...resultArray[next() % resultArray.length]);
   }),
+  http.get(`${baseURL}/shopping/item/:ownerId`, async () => {
+    const resultArray = [
+      [await getGetShoppingItemOwnerId200Response(), { status: 200 }],
+      [undefined, { status: 401 }],
+      [undefined, { status: 5 }],
+    ];
+
+    return HttpResponse.json(...resultArray[next() % resultArray.length]);
+  }),
+  http.post(`${baseURL}/shopping/item/:ownerId`, async () => {
+    const resultArray = [
+      [undefined, { status: 200 }],
+      [undefined, { status: 401 }],
+      [undefined, { status: 5 }],
+    ];
+
+    return HttpResponse.json(...resultArray[next() % resultArray.length]);
+  }),
 ];
+
+export function getGetMe200Response() {
+  return {
+    id: faker.number.int(),
+    user_name: faker.person.fullName(),
+    email: faker.internet.email(),
+    authority: faker.helpers.arrayElement(["COMMON", "ADMIN"]),
+  };
+}
+
+export function getGetMe500Response() {
+  return {
+    code: "エラーカテゴリ/エラータイプ",
+  };
+}
 
 export function getGetCategories200Response() {
   return [
@@ -181,4 +222,16 @@ export function getGetTodoTodoId200Response() {
     dueDate: "1990-01-01",
     done: faker.datatype.boolean(),
   };
+}
+
+export function getGetShoppingItemOwnerId200Response() {
+  return [
+    ...new Array(faker.number.int({ min: 1, max: MAX_ARRAY_LENGTH })).keys(),
+  ].map((_) => ({
+    id: faker.number.int(),
+    owner_id: faker.number.int(),
+    name: faker.person.fullName(),
+    category: "food",
+    picked: faker.datatype.boolean(),
+  }));
 }

@@ -17,9 +17,30 @@
     {
       "name": "todo",
       "description": "Todo情報"
+    },
+    {
+      "name": "shopping",
+      "description": "買い物情報"
     }
   ],
   "paths": {
+    "/me": {
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "自分情報取得API",
+        "description": "**自分情報取得API**<br/>\n<br/>\n<br/>\n",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetMe"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/signup": {
       "post": {
         "tags": [
@@ -459,10 +480,111 @@
           }
         }
       }
+    },
+    "/shopping/item/{owner_id}": {
+      "get": {
+        "tags": [
+          "shopping"
+        ],
+        "summary": "買い物リスト取得API",
+        "description": "`owner_id`で指定した買い物リストを取得します<br/>\n<br/>\n買い物アイテムのIDの昇順で返され、`picked` = `true`になっているレコードについては、<br/>\n返却対象外\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "owner_id",
+            "description": "オーナーID(所属している家庭単位のID)",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetShoppingItemList"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "shopping"
+        ],
+        "summary": "買い物登録API",
+        "description": "買い物メモを登録します<br/>\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "owner_id",
+            "description": "オーナーID(所属している家庭単位のID)",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category": {
+                    "type": "string",
+                    "description": "food または、 necessity\n",
+                    "example": "food"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Me": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "user_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "authority": {
+            "type": "string",
+            "enum": [
+              "COMMON",
+              "ADMIN"
+            ]
+          }
+        }
+      },
       "SignUp": {
         "type": "object",
         "properties": {
@@ -522,6 +644,34 @@
           },
           "done": {
             "type": "boolean"
+          }
+        }
+      },
+      "GetShoppingItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "nullable": false
+          },
+          "owner_id": {
+            "type": "integer",
+            "nullable": false
+          },
+          "name": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 255,
+            "nullable": false
+          },
+          "category": {
+            "type": "string",
+            "example": "food",
+            "nullable": false
+          },
+          "picked": {
+            "type": "boolean",
+            "nullable": false
           }
         }
       },
@@ -696,6 +846,16 @@
       }
     },
     "responses": {
+      "GetMe": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Me"
+            }
+          }
+        }
+      },
       "GetTodoList": {
         "description": "successful operation",
         "content": {
@@ -704,6 +864,19 @@
               "type": "array",
               "items": {
                 "$ref": "#/components/schemas/Todo"
+              }
+            }
+          }
+        }
+      },
+      "GetShoppingItemList": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/GetShoppingItem"
               }
             }
           }
