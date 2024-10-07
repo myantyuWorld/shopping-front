@@ -15,7 +15,24 @@ tags:
     description: カテゴリ情報
   - name: todo
     description: Todo情報
+  - name: shopping
+    description: 買い物情報
 paths:
+  /me:
+    get:
+      tags:
+        - account
+      summary: 自分情報取得API
+      description: |
+        **自分情報取得API**<br/>
+        <br/>
+        <br/>
+      responses:
+        200:
+          $ref: "#/components/responses/GetMe"
+        500:
+          $ref: '#/components/responses/InternalServerError'
+        
   /signup:
     post:
       tags:
@@ -339,8 +356,81 @@ paths:
           description: Not Found
         '5XX':
           description: Unexpected error.
+  /shopping/item/{owner_id}:
+    get:
+      tags:
+        - shopping
+      summary: 買い物リスト取得API
+      description: |
+        `owner_id`で指定した買い物リストを取得します<br/>
+        <br/>
+        買い物アイテムのIDの昇順で返され、`picked` = `true`になっているレコードについては、<br/>
+        返却対象外
+      parameters:
+        - in: path
+          name : owner_id
+          description: オーナーID(所属している家庭単位のID)
+          schema:
+            type : integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/GetShoppingItemList'
+        '401':
+          description: Authorization information is missing or invalid.
+        '5XX':
+          description: Unexpected error.
+    post:
+      tags:
+        - shopping
+      summary: 買い物登録API
+      description: |
+        買い物メモを登録します<br/>
+      parameters:
+        - in: path
+          name : owner_id
+          description: オーナーID(所属している家庭単位のID)
+          schema:
+            type : integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                  description: |
+                    food または、 necessity
+                  example: food
+                name:
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Authorization information is missing or invalid.
+        '5XX':
+          description: Unexpected error.
+        
 components:
   schemas:
+    Me:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_name:
+          type: string
+        email:
+          type: string
+          format: email
+        authority:
+          type: string
+          enum:
+            - COMMON
+            - ADMIN
     SignUp:
       type: object
       properties:
@@ -383,6 +473,27 @@ components:
           example: "1990-01-01"
         done:
           type: boolean
+    GetShoppingItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          nullable: false
+        owner_id:
+          type: integer
+          nullable: false
+        name:
+          type: string
+          minLength: 10
+          maxLength: 255
+          nullable: false
+        category:
+          type: string
+          example: food
+          nullable: false
+        picked:
+          type: boolean
+          nullable: false
     UserBase:
       type: object
       properties:
@@ -509,6 +620,12 @@ components:
         phoneNumber: null
         email: taro@example.com
   responses:
+    GetMe:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Me"
     GetTodoList:
       description: successful operation
       content:
@@ -517,6 +634,14 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Todo'
+    GetShoppingItemList:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/GetShoppingItem'
     GetTodo:
       description: successful operation
       content:
