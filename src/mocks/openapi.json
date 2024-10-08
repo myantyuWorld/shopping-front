@@ -509,6 +509,10 @@
                 "properties": {
                   "category": {
                     "type": "string",
+                    "enum": [
+                      "food",
+                      "necessity"
+                    ],
                     "description": "food または、 necessity\n",
                     "example": "food"
                   },
@@ -848,6 +852,16 @@
               "items": {
                 "$ref": "#/components/schemas/GetShoppingItem"
               }
+            }
+          }
+        }
+      },
+      "GetShoppingItem": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetShoppingItem"
             }
           }
         }

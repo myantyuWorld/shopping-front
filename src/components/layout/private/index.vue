@@ -1,15 +1,36 @@
 <script setup lang="ts">
+import { inject, onMounted, ref } from "vue"
 defineOptions({ inheritAttrs: false, name: "PublicLayout" });
+
+const userName = inject("userName")
 </script>
 
 <template>
   <div id="wrapper">
     <ul class="flex">
       <li class="mr-6">
-        <a class="text-blue-500 hover:text-blue-800" href="#">Todo</a>
+        <RouterLink
+              :to="{ name: 'todo' }"
+              class="text-blue-500 hover:text-blue-800"
+            >Todo</RouterLink>
       </li>
       <li class="mr-6">
-        <a class="text-gray-400 cursor-not-allowed" href="#">カテゴリ</a>
+        <RouterLink
+              :to="{ name: 'memo' }"
+              class="text-blue-500 hover:text-blue-800"
+            >memo</RouterLink>
+      </li>
+      <li class="mr-6">
+        <a class="text-gray-400 cursor-not-allowed" href="#">記録</a>
+      </li>
+      <li class="mr-6">
+        <RouterLink
+              :to="{ name: 'category' }"
+              class="text-gray-400 cursor-not-allowed"
+            >カテゴリ</RouterLink>
+      </li>
+      <li class="mr-6">
+        <a class="text-gray-400 cursor-not-allowed" href="#">{{ userName }}</a>
       </li>
     </ul>
     <aside

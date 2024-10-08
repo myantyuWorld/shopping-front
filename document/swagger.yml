@@ -383,6 +383,9 @@ paths:
               properties:
                 category:
                   type: string
+                  enum:
+                    - food
+                    - necessity
                   description: |
                     food または、 necessity
                   example: food
@@ -474,6 +477,12 @@ components:
         picked:
           type: boolean
           nullable: false
+      required:
+        - id
+        - owner_id
+        - name
+        - category
+        - picked
     UserBase:
       type: object
       properties:
@@ -622,6 +631,12 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/GetShoppingItem'
+    GetShoppingItem:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetShoppingItem'
     GetTodo:
       description: successful operation
       content:

@@ -728,8 +728,9 @@ export interface paths {
                          * @description food または、 necessity
                          *
                          * @example food
+                         * @enum {string}
                          */
-                        category?: string;
+                        category?: "food" | "necessity";
                         name?: string;
                     };
                 };
@@ -794,12 +795,12 @@ export interface components {
             done?: boolean;
         };
         GetShoppingItem: {
-            id?: number;
-            owner_id?: number;
-            name?: string;
+            id: number;
+            owner_id: number;
+            name: string;
             /** @example food */
-            category?: string;
-            picked?: boolean;
+            category: string;
+            picked: boolean;
         };
         UserBase: {
             id: string;
@@ -859,6 +860,15 @@ export interface components {
             };
             content: {
                 "application/json": components["schemas"]["GetShoppingItem"][];
+            };
+        };
+        /** @description successful operation */
+        GetShoppingItem: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["GetShoppingItem"];
             };
         };
         /** @description successful operation */
