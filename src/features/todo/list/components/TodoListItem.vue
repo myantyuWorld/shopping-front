@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { TodoPresenter } from "../types"
+import type{ TodoPresenter } from "../types"
 
 defineProps<{
   item: TodoPresenter
