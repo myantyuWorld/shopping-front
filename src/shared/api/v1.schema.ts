@@ -4,6 +4,40 @@
  */
 
 export interface paths {
+    "/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 自分情報取得API
+         * @description **自分情報取得API**<br/>
+         *     <br/>
+         *     <br/>
+         *
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["GetMe"];
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/signup": {
         parameters: {
             query?: never;
@@ -18,7 +52,6 @@ export interface paths {
          * @description **サインアップAPI**</br>
          *     <br/>
          *     <br/>
-         *     TBD<br/>
          *     - Eメールアドレス
          *     - ユーザー名
          *
@@ -32,11 +65,7 @@ export interface paths {
             };
             requestBody?: {
                 content: {
-                    "application/json": {
-                        email?: string;
-                        password?: string;
-                        username?: string;
-                    };
+                    "application/json": components["schemas"]["SignUp"];
                 };
             };
             responses: {
@@ -96,10 +125,7 @@ export interface paths {
             };
             requestBody?: {
                 content: {
-                    "application/json": {
-                        email?: string;
-                        password?: string;
-                    };
+                    "application/json": components["schemas"]["SignIn"];
                 };
             };
             responses: {
@@ -266,7 +292,6 @@ export interface paths {
             requestBody?: never;
             responses: {
                 200: components["responses"]["GetCategories"];
-                500: components["responses"]["InternalServerError"];
             };
         };
         put?: never;
@@ -299,13 +324,6 @@ export interface paths {
                 };
                 /** @description Authorization information is missing or invalid. */
                 401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unexpected error. */
-                "5XX": {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -370,13 +388,6 @@ export interface paths {
                     };
                     content?: never;
                 };
-                /** @description Unexpected error. */
-                "5XX": {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
             };
         };
         post?: never;
@@ -412,13 +423,6 @@ export interface paths {
                 };
                 /** @description Not Found */
                 404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unexpected error. */
-                "5XX": {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -464,13 +468,6 @@ export interface paths {
                     };
                     content?: never;
                 };
-                /** @description Unexpected error. */
-                "5XX": {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
             };
         };
         put?: never;
@@ -507,13 +504,6 @@ export interface paths {
                 };
                 /** @description Authorization information is missing or invalid. */
                 401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description Unexpected error. */
-                "5XX": {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -624,13 +614,6 @@ export interface paths {
                     };
                     content?: never;
                 };
-                /** @description Unexpected error. */
-                "5XX": {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
             };
         };
         post?: never;
@@ -685,10 +668,117 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/shopping/item/{owner_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 買い物リスト取得API
+         * @description `owner_id`で指定した買い物リストを取得します<br/>
+         *     <br/>
+         *     買い物アイテムのIDの昇順で返され、`picked` = `true`になっているレコードについては、<br/>
+         *     返却対象外
+         *
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description オーナーID(所属している家庭単位のID) */
+                    owner_id: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                200: components["responses"]["GetShoppingItemList"];
+                /** @description Authorization information is missing or invalid. */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        /**
+         * 買い物登録API
+         * @description 買い物メモを登録します<br/>
+         *
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description オーナーID(所属している家庭単位のID) */
+                    owner_id: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": {
+                        /**
+                         * @description food または、 necessity
+                         *
+                         * @example food
+                         * @enum {string}
+                         */
+                        category?: "food" | "necessity";
+                        name?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Authorization information is missing or invalid. */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        Me: {
+            id?: number;
+            user_name?: string;
+            /** Format: email */
+            email?: string;
+            /** @enum {string} */
+            authority?: "COMMON" | "ADMIN";
+        };
+        SignUp: {
+            email?: string;
+            password?: string;
+            username?: string;
+        };
+        SignIn: {
+            email?: string;
+            password?: string;
+        };
         Category: {
             id?: number;
             name?: string;
@@ -703,6 +793,14 @@ export interface components {
              */
             dueDate?: string;
             done?: boolean;
+        };
+        GetShoppingItem: {
+            id: number;
+            owner_id: number;
+            name: string;
+            /** @example food */
+            category: string;
+            picked: boolean;
         };
         UserBase: {
             id: string;
@@ -738,12 +836,39 @@ export interface components {
     };
     responses: {
         /** @description successful operation */
+        GetMe: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["Me"];
+            };
+        };
+        /** @description successful operation */
         GetTodoList: {
             headers: {
                 [name: string]: unknown;
             };
             content: {
                 "application/json": components["schemas"]["Todo"][];
+            };
+        };
+        /** @description successful operation */
+        GetShoppingItemList: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["GetShoppingItem"][];
+            };
+        };
+        /** @description successful operation */
+        GetShoppingItem: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": components["schemas"]["GetShoppingItem"];
             };
         };
         /** @description successful operation */
