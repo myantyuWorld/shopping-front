@@ -27,8 +27,8 @@ export const useInteract = () => {
   }
 
   // TODO : 買い物メモの行クリック時（Xボタン）
-  const onClickItemDelete = () => {
-    console.log("onClickItemDelete")
+  const onClickItemDelete = (id: number) => {
+    console.log(`onClickItemDelete ;; number :: ${id}`)
   }
 
   // TODO : カテゴリ切り替え時 | 一覧表示しているものに対して、フィルタをかける
