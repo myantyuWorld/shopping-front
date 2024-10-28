@@ -6,7 +6,6 @@ import TodoListPage from "./index.vue";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta: Meta<typeof TodoListPage> = {
-  title: "Page/todo/list/TodoListPage",
   component: TodoListPage,
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],

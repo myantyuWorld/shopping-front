@@ -6,7 +6,6 @@ import IndexPage from "./index.vue";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta: Meta<typeof IndexPage> = {
-  title: "Page/category/IndexPage",
   component: IndexPage,
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],

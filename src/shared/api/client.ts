@@ -4,8 +4,10 @@ import * as v1Schema from "./v1.schema";
 /**
  * @see {@link https://openapi-ts.pages.dev/openapi-fetch}
  */
+// TODO : env化したい
 const baseUrl: string = "http://localhost:5173/";
 
+// TODO : Firebase Authenticationのアクセストークンを利用して、認証したい
 // const authMiddleware: Middleware = {
 //   onRequest: async (req) => {
 //     const accessToken = localStorage.getItem("token");
