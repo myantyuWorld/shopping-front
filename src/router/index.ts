@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { PublicLayout, PrivateLayout } from "@/components/layout";
 import { LoginPage } from "@/features/login";
-import { CategoryPage } from "@/features/categories";
-import { TodoListPage } from "@/features/todo/list";
 import { ShoppingMemoPage } from "@/features/shopping/list";
 
 const router = createRouter({
@@ -14,22 +12,6 @@ const router = createRouter({
       component: LoginPage,
       meta: {
         layout: PublicLayout
-      }
-    },
-    {
-      path: "/category",
-      name: "category",
-      component: CategoryPage,
-      meta: {
-        layout: PrivateLayout
-      }
-    },
-    {
-      path: "/todo",
-      name: "todo",
-      component: TodoListPage,
-      meta: {
-        layout: PrivateLayout
       }
     },
     {

@@ -20,7 +20,7 @@ export const useInteract = () => {
 
     // TODO : 買い物リスト画面への遷移の実装 | GET /shopping/item
     router.push({
-      name: 'todo'
+      name: 'memo'
     })
   })
 
