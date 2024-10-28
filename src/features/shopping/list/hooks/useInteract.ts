@@ -1,11 +1,16 @@
 import { inject, onMounted, ref } from "vue"
 import { convertPresenter, type ShoppingCategory, type ShoppingPresenter } from "@/features/shopping/list";
 import { client } from "@/shared/api/client";
+import { useForm } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/zod";
+import { schema, type ShoppingMemoSchema } from "../types/schema";
 
 export const useInteract = () => {
   const helloMessage = inject("message")
   const items = ref<ShoppingPresenter[]>([])
-  const category = ref<ShoppingCategory>("food")
+  const { handleSubmit, defineField, errors } = useForm<ShoppingMemoSchema>({
+    validationSchema: toTypedSchema(schema)
+  })
 
   onMounted(async () => {
     const { data, error } = await client.GET("/shopping/item/{owner_id}", {
@@ -21,25 +26,35 @@ export const useInteract = () => {
     }
   })
 
-  // TODO : 買い物メモの追加ボタン押下時
-  const onClickAdd = () => {
-    console.log("onClickAdd")
+  const onClickAdd = handleSubmit((values) => {
+    console.log(values)
+
+    // TODO : API Request
+
+    // TODO : 追加されたitemのidを用いて、'item.value'にappendする
+
+    // TODO : Toast表示とかできたらオシャレ
+  })
+
+  const onClickItemDelete = (id: number) => {
+    console.log(`onClickItemDelete ;; number :: ${id}`)
+
+    // TODO : API Request
+
+    // TODO : 削除できたidを用いて、'item.value'から取り除く
   }
 
-  // TODO : 買い物メモの行クリック時（Xボタン）
-  const onClickItemDelete = () => {
-    console.log("onClickItemDelete")
-  }
-
-  // TODO : カテゴリ切り替え時 | 一覧表示しているものに対して、フィルタをかける
   const onClickSwitchCategory = () => {
     console.log("onClickSwitchCategory")
+
+    // TODO : 指定された'category'で'item.value'をfilterする
   }
 
   return {
+    defineField,
+    errors,
     helloMessage,
     items,
-    category,
     onClickAdd,
     onClickItemDelete,
     onClickSwitchCategory,

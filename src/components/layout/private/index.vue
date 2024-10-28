@@ -7,7 +7,7 @@ const userName = inject("userName")
 
 <template>
   <div id="wrapper">
-    <ul class="flex">
+    <ul class="flex justify-center bg-indigo-950/75 p-3">
       <li class="mr-6">
         <RouterLink
               :to="{ name: 'todo' }"
@@ -107,7 +107,7 @@ const userName = inject("userName")
         </ul>
       </div>
     </aside>
-    <div class="body">
+    <div class="m-4">
       <slot></slot>
     </div>
   </div>

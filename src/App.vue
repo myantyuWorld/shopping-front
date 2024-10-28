@@ -6,14 +6,12 @@ const route = useRoute();
 const layout = computed(() => route.meta.layout);
 
 // TODO : AppProviderを定義して、fetchMe呼び出しして、User情報を提供する
-provide('userName', 'name')
+provide("userName", "name");
 </script>
 <!-- from cdn -->
 
 <template>
-  <div class="container mx-auto py-4">
-    <Component :is="layout">
-      <RouterView />
-    </Component>
-  </div>
+  <Component :is="layout">
+    <RouterView />
+  </Component>
 </template>

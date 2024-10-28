@@ -1,2 +1,2 @@
 export * from './hooks/useInteract'
-export {default as LoginPage} from "./routes/index.vue"
+export { default as LoginPage } from "./routes/LoginPage.vue"

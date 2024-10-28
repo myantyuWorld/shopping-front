@@ -799,7 +799,7 @@ export interface components {
             owner_id: number;
             name: string;
             /** @example food */
-            category: string;
+            category: "food" | "necessity";
             picked: boolean;
         };
         UserBase: {
