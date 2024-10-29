@@ -844,8 +844,11 @@ export interface components {
             id: number;
             owner_id: number;
             name: string;
-            /** @example food */
-            category: string;
+            /**
+             * @example food
+             * @enum {string}
+             */
+            category: "food" | "necessity";
             picked: boolean;
         };
         UserBase: {
