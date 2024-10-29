@@ -146,7 +146,7 @@ export const handlers = [
   }),
   http.post(`${baseURL}/shopping/item/:ownerId`, async () => {
     const resultArray = [
-      [undefined, { status: 200 }],
+      [await getPostShoppingItemOwnerId200Response(), { status: 200 }],
       [undefined, { status: 401 }],
     ];
 
@@ -210,4 +210,12 @@ export function getGetShoppingItemOwnerId200Response() {
     category: "food",
     picked: faker.datatype.boolean(),
   }));
+}
+
+export function getPostShoppingItemOwnerId200Response() {
+  return {
+    id: faker.number.int(),
+    category: faker.helpers.arrayElement(["food", "necessity"]),
+    description: faker.lorem.words(),
+  };
 }

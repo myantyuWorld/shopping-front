@@ -26,12 +26,32 @@ export const useInteract = () => {
     }
   })
 
-  const onClickAdd = handleSubmit((values) => {
+  const onClickAdd = handleSubmit(async (values) => {
     console.log(values)
 
-    // TODO : API Request
+    const {data, error} =  await client.POST("/shopping/item/{owner_id}", {
+      params: {
+        path: { owner_id: 1 },
+      },
+      body: {
+        category: values.category ?? "food",
+        description: values.description,
+      }
+    })
+    if (error) {
+      console.debug(error)
+    }
 
-    // TODO : 追加されたitemのidを用いて、'item.value'にappendする
+    // TODO : modify convert logic
+    items.value.push({
+      id: data.id!,
+      ownerId: 1, // TODO : modify hard cording
+      name: data.description ?? "",
+      category: data.category ?? "" ,
+      categoryLabel: "日用品", // TODO : modify hard cording
+      picked: false,
+      pickedClassName: "green"
+    })
 
     // TODO : Toast表示とかできたらオシャレ
   })

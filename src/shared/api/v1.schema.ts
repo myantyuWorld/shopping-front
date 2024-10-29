@@ -728,10 +728,9 @@ export interface paths {
                          * @description food または、 necessity
                          *
                          * @example food
-                         * @enum {string}
                          */
-                        category?: "food" | "necessity";
-                        name?: string;
+                        category?: string;
+                        description?: string;
                     };
                 };
             };
@@ -741,7 +740,14 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": {
+                            id?: number;
+                            /** @enum {string} */
+                            category?: "food" | "necessity";
+                            description?: string;
+                        };
+                    };
                 };
                 /** @description Authorization information is missing or invalid. */
                 401: {
@@ -799,7 +805,7 @@ export interface components {
             owner_id: number;
             name: string;
             /** @example food */
-            category: "food" | "necessity";
+            category: string;
             picked: boolean;
         };
         UserBase: {
