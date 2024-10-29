@@ -728,10 +728,57 @@ export interface paths {
                          * @description food または、 necessity
                          *
                          * @example food
-                         * @enum {string}
                          */
-                        category?: "food" | "necessity";
-                        name?: string;
+                        category?: string;
+                        description?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            id?: number;
+                            /** @enum {string} */
+                            category?: "food" | "necessity";
+                            description?: string;
+                        };
+                    };
+                };
+                /** @description Authorization information is missing or invalid. */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        /**
+         * 買い物削除API
+         * @description 買い物メモを削除します<br/>
+         *
+         */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description オーナーID(所属している家庭単位のID) */
+                    owner_id: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": {
+                        /** @description 買い物メモのID
+                         *      */
+                        id?: number;
                     };
                 };
             };
@@ -752,7 +799,6 @@ export interface paths {
                 };
             };
         };
-        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -799,7 +845,7 @@ export interface components {
             owner_id: number;
             name: string;
             /** @example food */
-            category: "food" | "necessity";
+            category: string;
             picked: boolean;
         };
         UserBase: {

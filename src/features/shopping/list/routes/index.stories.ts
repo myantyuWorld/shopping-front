@@ -35,6 +35,24 @@ const meta: Meta<typeof Component> = {
             ]
           );
         }),
+        http.post('http://localhost:5173/shopping/item/1', async () => {
+          return HttpResponse.json(
+            {
+              id: 1000,
+              category: "necessity",
+              description: "ccc",
+            },
+            {status: 200}
+          )
+        }),
+        http.delete('http://localhost:5173/shopping/item/1', async () => {
+          return HttpResponse.json(
+            {
+              id: 1,
+            },
+            {status: 200}
+          )
+        })
       ]
     }
   }

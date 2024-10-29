@@ -1,5 +1,5 @@
 import { inject, onMounted, ref } from "vue"
-import { convertPresenter, type ShoppingCategory, type ShoppingPresenter } from "@/features/shopping/list";
+import { convertPresenter, removeList, type ShoppingCategory, type ShoppingPresenter } from "@/features/shopping/list";
 import { client } from "@/shared/api/client";
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
@@ -26,22 +26,51 @@ export const useInteract = () => {
     }
   })
 
-  const onClickAdd = handleSubmit((values) => {
+  const onClickAdd = handleSubmit(async (values) => {
     console.log(values)
 
-    // TODO : API Request
+    const {data, error} =  await client.POST("/shopping/item/{owner_id}", {
+      params: {
+        path: { owner_id: 1 },
+      },
+      body: {
+        category: values.category ?? "food",
+        description: values.description,
+      }
+    })
+    if (error) {
+      console.debug(error)
+    }
 
-    // TODO : 追加されたitemのidを用いて、'item.value'にappendする
+    // TODO : modify convert logic
+    items.value.push({
+      id: data.id!,
+      ownerId: 1, // TODO : modify hard cording
+      name: data.description ?? "",
+      category: data.category ?? "" ,
+      categoryLabel: "日用品", // TODO : modify hard cording
+      picked: false,
+      pickedClassName: "green"
+    })
 
     // TODO : Toast表示とかできたらオシャレ
   })
 
-  const onClickItemDelete = (id: number) => {
-    console.log(`onClickItemDelete ;; number :: ${id}`)
+  const onClickItemDelete = async (id: number) => {
+    const { error } = await client.DELETE("/shopping/item/{owner_id}", {
+      params: {
+        path: { owner_id: 1 },
+      },
+      body: {
+        id: 1 // TODO : modify hard cording
+      }
+    })
+    if (error) {
+      console.debug(error)
+    }
 
-    // TODO : API Request
-
-    // TODO : 削除できたidを用いて、'item.value'から取り除く
+    const result = removeList(items.value, id)
+    items.value = result
   }
 
   const onClickSwitchCategory = () => {
