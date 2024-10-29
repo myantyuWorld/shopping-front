@@ -18,8 +18,8 @@ const enableMocking = async () => {
   // src/main.ts:17:35 - error TS7016: Could not find a declaration file for module './mocks/browser'. '/Users/ohbay/Documents/2_leo-twins/shopping/shopping-front/src/mocks/browser.js' implicitly has an 'any' type.
 
   // TODO : ローカルで開発する際には必要だが、↑のエラーがあるので、npm run build（vercelへのデプロイも）に失敗する
-  const { worker } = await import("./mocks/browser")
-  return worker.start({ onUnhandledRequest: "bypass" })
+  // const { worker } = await import("./mocks/browser")
+  // return worker.start({ onUnhandledRequest: "bypass" })
 }
 
 enableMocking().then(() => {

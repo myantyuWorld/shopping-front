@@ -2,19 +2,6 @@ import { expect, test } from 'vitest'
 import type { ShoppingPresenter } from '../types'
 import { removeList } from './functions'
 
-// indexが飛んでる
-// test.skip('nowが0000003の時、nextが0000010', () => {
-//   const now = '0000003'
-//   const next = resolveNextLivestockInfo(arr, {
-//     typeCode: '01',
-//     listedNumber: now
-//   })
-//   expect(next).toStrictEqual({
-//     typeCode: '01',
-//     listedNumber: '0000010'
-//   })
-// })
-
 test('remote List', () => {
   const arr: ShoppingPresenter[] = [
     {
@@ -22,7 +9,7 @@ test('remote List', () => {
       ownerId: 0,
       name: '',
       category: '',
-      categoryLabel: '',
+      categoryLabel: '食費',
       picked: false,
       pickedClassName: 'grey'
     },
@@ -31,7 +18,7 @@ test('remote List', () => {
       ownerId: 0,
       name: '',
       category: '',
-      categoryLabel: '',
+      categoryLabel: '食費',
       picked: false,
       pickedClassName: 'grey'
     },
@@ -40,7 +27,7 @@ test('remote List', () => {
       ownerId: 0,
       name: '',
       category: '',
-      categoryLabel: '',
+      categoryLabel: '日用品',
       picked: false,
       pickedClassName: 'grey'
     },
