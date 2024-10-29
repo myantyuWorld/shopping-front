@@ -44,6 +44,14 @@ const meta: Meta<typeof Component> = {
             },
             {status: 200}
           )
+        }),
+        http.delete('http://localhost:5173/shopping/item/1', async () => {
+          return HttpResponse.json(
+            {
+              id: 1,
+            },
+            {status: 200}
+          )
         })
       ]
     }

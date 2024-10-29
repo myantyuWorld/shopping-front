@@ -152,6 +152,14 @@ export const handlers = [
 
     return HttpResponse.json(...resultArray[next() % resultArray.length]);
   }),
+  http.delete(`${baseURL}/shopping/item/:ownerId`, async () => {
+    const resultArray = [
+      [undefined, { status: 200 }],
+      [undefined, { status: 401 }],
+    ];
+
+    return HttpResponse.json(...resultArray[next() % resultArray.length]);
+  }),
 ];
 
 export function getGetMe200Response() {

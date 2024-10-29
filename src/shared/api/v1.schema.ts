@@ -758,7 +758,47 @@ export interface paths {
                 };
             };
         };
-        delete?: never;
+        /**
+         * 買い物削除API
+         * @description 買い物メモを削除します<br/>
+         *
+         */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description オーナーID(所属している家庭単位のID) */
+                    owner_id: number;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": {
+                        /** @description 買い物メモのID
+                         *      */
+                        id?: number;
+                    };
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Authorization information is missing or invalid. */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
