@@ -20,7 +20,7 @@ export type ShoppingPresenter = {
   ownerId: number
   name: string
   category: string
-  categoryLabel: string
+  categoryLabel: ShoppingCategoryDict['label']
   picked: boolean
   pickedClassName: "grey" | "green"
 }

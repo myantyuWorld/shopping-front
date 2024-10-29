@@ -699,6 +699,10 @@
           },
           "category": {
             "type": "string",
+            "enum": [
+              "food",
+              "necessity"
+            ],
             "example": "food",
             "nullable": false
           },
