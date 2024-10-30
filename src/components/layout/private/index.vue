@@ -2,7 +2,7 @@
 import { inject, onMounted, ref } from "vue"
 defineOptions({ inheritAttrs: false, name: "PublicLayout" });
 
-const userName = inject("userName")
+// const userName = inject("userName")
 </script>
 
 <template>
