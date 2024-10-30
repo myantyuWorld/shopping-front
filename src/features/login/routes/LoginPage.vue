@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { useInteract } from "@/features/login";
+import { RouterLink } from 'vue-router';
+import { useInteract } from '../hooks/useInteract';
+
 
 const { defineField, errors, onClickSignIn } = useInteract();
 
@@ -31,8 +33,9 @@ const [password, passwordProps] = defineField("password");
             {{ errors.password }}
           </div>
           <div class="flex items-center justify-between">
-            <a href="#"
-              class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">パスワードを忘れた方はこちら</a>
+            <RouterLink :to="{ name: 'forgot-password' }" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+              >パスワードを忘れた方はこちらから
+            </RouterLink>
           </div>
           <div class="flex flex-wrap">
             <button type="button" @click="onClickSignIn"
@@ -54,6 +57,7 @@ const [password, passwordProps] = defineField("password");
     </div>
   </section>
 </template>
+
 <style scoped>
 a img:last-child {
   display: none;

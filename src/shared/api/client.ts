@@ -5,7 +5,7 @@ import * as v1Schema from "./v1.schema";
  * @see {@link https://openapi-ts.pages.dev/openapi-fetch}
  */
 // TODO : env化したい
-const baseUrl: string = "http://localhost:5173/";
+const baseUrl: string = "http://localhost:8080/";
 
 // TODO : Firebase Authenticationのアクセストークンを利用して、認証したい
 // const authMiddleware: Middleware = {
@@ -19,7 +19,21 @@ const baseUrl: string = "http://localhost:5173/";
 //   }
 // };
 
+export const csrfToken = () => {
+  const meta = document.querySelector("meta[name=csrf-token]");
+  return meta && (meta as HTMLMetaElement).content;
+};
+
+const fetchRequestCsrfTokenMiddleware: Middleware = {
+  onRequest({ request }) {
+    const csrfTokenValue = csrfToken();
+    if (csrfTokenValue) request.headers.set("X-CSRF-Token", csrfTokenValue);
+    return request;
+  },
+};
 const instance = createClient<v1Schema.paths>({ baseUrl });
+instance.use(fetchRequestCsrfTokenMiddleware);
+
 // instance.use(authMiddleware);
 
 export const client = {

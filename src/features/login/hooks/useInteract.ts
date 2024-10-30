@@ -3,9 +3,10 @@ import * as schema from "../types/schema"
 import { toTypedSchema } from "@vee-validate/zod"
 import { client } from "@/shared/api/client"
 import { handleSubmitError } from "./functions"
-import router from "@/router"
+import { useRouter } from "vue-router"
 
 export const useInteract = () => {
+  const router = useRouter()
   const { handleSubmit, defineField, errors } = useForm<schema.LoginInputSchema>({
     validationSchema: toTypedSchema(schema.schema),
   })
@@ -16,12 +17,10 @@ export const useInteract = () => {
       // TODO : 現状、alertにしているが、コールバック関数渡して、errorMessageを設定するか、モーダル出すか良しなにできるようにする
       // この辺りは、細かいデザインが決まってないので後からにする
       handleSubmitError(error)
+      return
     }
 
-    // TODO : 買い物リスト画面への遷移の実装 | GET /shopping/item
-    router.push({
-      name: 'memo'
-    })
+    router.push({name: 'memo'})
   })
 
   return {

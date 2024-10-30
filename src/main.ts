@@ -10,9 +10,9 @@ const app = createApp(App);
 app.use(router);
 
 const enableMocking = async () => {
-  if (import.meta.env.PROD) {
-    return
-  }
+  // if (import.meta.env.PROD) {
+  //   return
+  // }
 
   // TODO : `npm run build`した時、以下のエラーが発生しているので直したい
   // src/main.ts:17:35 - error TS7016: Could not find a declaration file for module './mocks/browser'. '/Users/ohbay/Documents/2_leo-twins/shopping/shopping-front/src/mocks/browser.js' implicitly has an 'any' type.
