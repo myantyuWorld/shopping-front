@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CardArea, FormArea } from "@/components/card";
+import { CardArea, FormArea } from "@/components/elements/card";
 import type { ShoppingCategory } from "../types";
 import type { FieldEntry } from "vee-validate";
 
