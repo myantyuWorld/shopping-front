@@ -1,11 +1,11 @@
 import { useForm } from "vee-validate"
-import * as schema from "../types/schema"
+import * as schema from "./types/schema"
 import { toTypedSchema } from "@vee-validate/zod"
 import { client } from "@/shared/api/client"
 import { handleSubmitError } from "./functions"
 import { useRouter } from "vue-router"
 
-export const useInteract = () => {
+export const useLogin = () => {
   const router = useRouter()
   const { handleSubmit, defineField, errors } = useForm<schema.LoginInputSchema>({
     validationSchema: toTypedSchema(schema.schema),

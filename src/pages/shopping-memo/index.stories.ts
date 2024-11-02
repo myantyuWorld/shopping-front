@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/vue3'
-import Component from './index.vue'
+import Component from './ShoppingMemoPage.vue'
 import { http, HttpResponse } from 'msw';
 
 const meta: Meta<typeof Component> = {

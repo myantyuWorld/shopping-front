@@ -1,5 +1,5 @@
 import { type Meta, type StoryObj } from '@storybook/vue3'
-import Component from './SignUp.vue'
+import Component from './SignUpPage.vue'
 
 const meta: Meta<typeof Component> = {
   component: Component,

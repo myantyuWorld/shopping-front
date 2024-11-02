@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useInteract } from "@/features/shopping/list";
-import ShoppingItem from "../components/ShoppingItem.vue";
-import Category from "../components/CategorySwitch.vue";
+import ShoppingItem from "./components/ShoppingItem.vue";
+import Category from "./components/CategorySwitch.vue";
 import { CardArea } from "@/components/elements/card";
-import ShoppingRegisterForm from "../components/ShoppingRegisterForm.vue";
+import ShoppingRegisterForm from "./components/ShoppingRegisterForm.vue";
 
 const {
   defineField,

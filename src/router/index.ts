@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { PublicLayout, PrivateLayout } from "@/components/layout";
-import { ShoppingMemoPage } from "@/features/shopping/list";
-import { LoginPage } from "@/features/login";
-import { SignUpPage } from "@/features/signup";
+import LoginPage from "@/pages/login/LoginPage.vue";
+import SignUpPage from "@/pages/signup/SignUpPage.vue";
+import ShoppingMemoPage from "@/pages/shopping-memo/ShoppingMemoPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

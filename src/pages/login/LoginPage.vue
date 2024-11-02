@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
-import { useInteract } from "../hooks/useInteract";
 import { PageTitle } from "@/components/elements/header";
 import { CardArea } from "@/components/elements/card";
 import { TextInput } from "@/components/elements/form";
+import { useLogin } from "@/features/auth";
 
-const { defineField, errors, onClickSignIn } = useInteract();
+const { defineField, errors, onClickSignIn } = useLogin();
 
 const [email, emailProps] = defineField("email");
 const [password, passwordProps] = defineField("password");
