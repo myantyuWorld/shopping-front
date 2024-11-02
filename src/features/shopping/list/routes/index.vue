@@ -2,7 +2,7 @@
 import { useInteract } from "@/features/shopping/list";
 import ShoppingItem from "../components/ShoppingItem.vue";
 import Category from "../components/CategorySwitch.vue";
-import { CardArea } from "@/components/card";
+import { CardArea } from "@/components/elements/card";
 import ShoppingRegisterForm from "../components/ShoppingRegisterForm.vue";
 
 const {
