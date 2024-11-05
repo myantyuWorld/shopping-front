@@ -8,7 +8,7 @@ import { useRouter } from "vue-router"
 export const useLogin = () => {
   const router = useRouter()
   const { handleSubmit, defineField, errors } = useForm<schema.LoginInputSchema>({
-    validationSchema: toTypedSchema(schema.schema),
+    validationSchema: toTypedSchema(schema.loginSchema),
   })
 
   const onClickSignIn = handleSubmit(async (body) => {
