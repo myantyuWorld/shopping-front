@@ -4,6 +4,7 @@ import { PageTitle } from "@/components/elements/header";
 import { CardArea } from "@/components/elements/card";
 import { TextInput } from "@/components/elements/form";
 import { useLogin } from "@/features/auth";
+import PageActionButton from "@/components/elements/button/PageActionButton.vue";
 
 const { defineField, errors, onClickSignIn } = useLogin();
 
@@ -40,13 +41,7 @@ const [password, passwordProps] = defineField("password");
       </RouterLink>
     </div>
     <div class="flex flex-wrap">
-      <button
-        type="button"
-        @click="onClickSignIn"
-        class="w-full text-black border  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-      >
-        Sign in
-      </button>
+      <PageActionButton :primary="true" @click="onClickSignIn">Sign in</PageActionButton>
       <!-- LINE LOGIN APIへリクエストし、リダイレクトさせる（hooksで定義して、200だったら、リダイレクトするっていう処理の認識であっている？） -->
       <a href="">
         <img class="btn_line" src="@/assets/btn_login_base.png" />
