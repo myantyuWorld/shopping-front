@@ -85,7 +85,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "$ref": "#/components/responses/SignInResponse"
           },
           "401": {
             "description": "Authorization information is missing or invalid."
@@ -457,7 +457,7 @@
         }
       }
     },
-    "/shopping/item/{owner_id}": {
+    "/shopping/{owner_id}": {
       "get": {
         "tags": [
           "shopping"
@@ -470,7 +470,7 @@
             "name": "owner_id",
             "description": "オーナーID(所属している家庭単位のID)",
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
             "required": true
           }
@@ -496,7 +496,7 @@
             "name": "owner_id",
             "description": "オーナーID(所属している家庭単位のID)",
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
             "required": true
           }
@@ -550,7 +550,9 @@
             "description": "Authorization information is missing or invalid."
           }
         }
-      },
+      }
+    },
+    "/shopping/{owner_id}/{item_id}": {
       "delete": {
         "tags": [
           "shopping"
@@ -563,26 +565,20 @@
             "name": "owner_id",
             "description": "オーナーID(所属している家庭単位のID)",
             "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "item_id",
+            "description": "オーナーID(所属している家庭単位のID)",
+            "schema": {
               "type": "integer"
             },
             "required": true
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "description": "買い物メモのID\n"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -691,7 +687,7 @@
             "type": "integer",
             "nullable": false
           },
-          "name": {
+          "description": {
             "type": "string",
             "minLength": 10,
             "maxLength": 255,
@@ -714,7 +710,7 @@
         "required": [
           "id",
           "owner_id",
-          "name",
+          "description",
           "category",
           "picked"
         ]
@@ -890,6 +886,24 @@
       }
     },
     "responses": {
+      "SignInResponse": {
+        "description": "successful sign in operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "userId"
+              ]
+            }
+          }
+        }
+      },
       "GetMe": {
         "description": "successful operation",
         "content": {

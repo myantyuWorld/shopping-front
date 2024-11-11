@@ -17,7 +17,7 @@ export type ShoppingCategoryDict =
 
 export type ShoppingPresenter = {
   id: number
-  ownerId: number
+  ownerId: string
   name: string
   category: string
   categoryLabel: ShoppingCategoryDict['label']

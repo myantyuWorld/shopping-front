@@ -12,13 +12,14 @@ export const useLogin = () => {
   })
 
   const onClickSignIn = handleSubmit(async (body) => {
-    const { error } = await client.POST("/normal/login", { body })
+    const { data, error } = await client.POST("/normal/login", { body })
     if (error) {
       // TODO : 現状、alertにしているが、コールバック関数渡して、errorMessageを設定するか、モーダル出すか良しなにできるようにする
       // この辺りは、細かいデザインが決まってないので後からにする
       handleSubmitError(error)
       return
     }
+    localStorage.setItem("userId", data.userId)
 
     router.push({name: 'memo'})
   })

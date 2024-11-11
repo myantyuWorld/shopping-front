@@ -37,7 +37,7 @@ export const handlers = [
   }),
   http.post(`${baseURL}/normal/login`, async () => {
     const resultArray = [
-      [undefined, { status: 200 }],
+      [await getPostNormalLogin200Response(), { status: 200 }],
       [undefined, { status: 401 }],
       [undefined, { status: 5 }],
     ];
@@ -136,23 +136,23 @@ export const handlers = [
 
     return HttpResponse.json(...resultArray[next() % resultArray.length]);
   }),
-  http.get(`${baseURL}/shopping/item/:ownerId`, async () => {
+  http.get(`${baseURL}/shopping/:ownerId`, async () => {
     const resultArray = [
-      [await getGetShoppingItemOwnerId200Response(), { status: 200 }],
+      [await getGetShoppingOwnerId200Response(), { status: 200 }],
       [undefined, { status: 401 }],
     ];
 
     return HttpResponse.json(...resultArray[next() % resultArray.length]);
   }),
-  http.post(`${baseURL}/shopping/item/:ownerId`, async () => {
+  http.post(`${baseURL}/shopping/:ownerId`, async () => {
     const resultArray = [
-      [await getPostShoppingItemOwnerId200Response(), { status: 200 }],
+      [await getPostShoppingOwnerId200Response(), { status: 200 }],
       [undefined, { status: 401 }],
     ];
 
     return HttpResponse.json(...resultArray[next() % resultArray.length]);
   }),
-  http.delete(`${baseURL}/shopping/item/:ownerId`, async () => {
+  http.delete(`${baseURL}/shopping/:ownerId/:itemId`, async () => {
     const resultArray = [
       [undefined, { status: 200 }],
       [undefined, { status: 401 }],
@@ -168,6 +168,12 @@ export function getGetMe200Response() {
     user_name: faker.person.fullName(),
     email: faker.internet.email(),
     authority: faker.helpers.arrayElement(["COMMON", "ADMIN"]),
+  };
+}
+
+export function getPostNormalLogin200Response() {
+  return {
+    userId: faker.lorem.words(),
   };
 }
 
@@ -208,19 +214,19 @@ export function getGetTodoTodoId200Response() {
   };
 }
 
-export function getGetShoppingItemOwnerId200Response() {
+export function getGetShoppingOwnerId200Response() {
   return [
     ...new Array(faker.number.int({ min: 1, max: MAX_ARRAY_LENGTH })).keys(),
   ].map((_) => ({
     id: faker.number.int(),
     owner_id: faker.number.int(),
-    name: faker.person.fullName(),
+    description: faker.string.alpha({ length: { min: 10, max: 255 } }),
     category: "food",
     picked: faker.datatype.boolean(),
   }));
 }
 
-export function getPostShoppingItemOwnerId200Response() {
+export function getPostShoppingOwnerId200Response() {
   return {
     id: faker.number.int(),
     category: faker.helpers.arrayElement(["food", "necessity"]),

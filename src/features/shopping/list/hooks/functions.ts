@@ -3,8 +3,8 @@ import { SHOPPING_CATEGORY_DICT, type ShoppingCategory, type ShoppingPresenter }
 
 export const convertPresenter = (res: ApiResponse<"GetShoppingItem">): ShoppingPresenter => ({
   id: res.id,
-  ownerId: res.owner_id,
-  name: res.name,
+  ownerId: "",
+  name: res.description,
   category: res.category,
   categoryLabel: SHOPPING_CATEGORY_DICT[res.category].label,
   picked: res.picked,

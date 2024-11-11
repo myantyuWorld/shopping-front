@@ -8,14 +8,15 @@ import { schema, type ShoppingMemoSchema } from "../types/schema";
 export const useInteract = () => {
   const helloMessage = inject("message")
   const items = ref<ShoppingPresenter[]>([])
-  const { handleSubmit, defineField, errors } = useForm<ShoppingMemoSchema>({
+  const { handleSubmit, defineField, errors, resetForm } = useForm<ShoppingMemoSchema>({
     validationSchema: toTypedSchema(schema)
   })
-
+  
   onMounted(async () => {
-    const { data, error } = await client.GET("/shopping/item/{owner_id}", {
+    const userId = localStorage.getItem("userId")
+    const { data, error } = await client.GET("/shopping/{owner_id}", {
       params: {
-        path: {owner_id: 1}
+        path: {owner_id: userId ?? ''}
       }
     })
     if (error) {
@@ -28,10 +29,11 @@ export const useInteract = () => {
 
   const onClickAdd = handleSubmit(async (values) => {
     console.log(values)
+    const userId = localStorage.getItem("userId") ?? ''
 
-    const {data, error} =  await client.POST("/shopping/item/{owner_id}", {
+    const {data, error} =  await client.POST("/shopping/{owner_id}", {
       params: {
-        path: { owner_id: 1 },
+        path: { owner_id: userId },
       },
       body: {
         category: values.category ?? "food",
@@ -42,28 +44,28 @@ export const useInteract = () => {
       console.debug(error)
     }
 
+    resetForm()
+
     // TODO : modify convert logic
     items.value.push({
       id: data.id!,
-      ownerId: 1, // TODO : modify hard cording
-      name: data.description ?? "",
-      category: data.category ?? "" ,
+      ownerId: userId, // TODO : modify hard cording
+      name: values.description,
+      category: values.category ?? "food" ,
       categoryLabel: "日用品", // TODO : modify hard cording
       picked: false,
       pickedClassName: "green"
     })
-
-    // TODO : Toast表示とかできたらオシャレ
   })
 
   const onClickItemDelete = async (id: number) => {
-    const { error } = await client.DELETE("/shopping/item/{owner_id}", {
+    console.log(id)
+    const userId = localStorage.getItem("userId") ?? ''
+
+    const { error } = await client.DELETE("/shopping/{owner_id}/{item_id}", {
       params: {
-        path: { owner_id: 1 },
+        path: { owner_id: userId, item_id: id },
       },
-      body: {
-        id: 1 // TODO : modify hard cording
-      }
     })
     if (error) {
       console.debug(error)

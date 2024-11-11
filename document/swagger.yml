@@ -72,7 +72,7 @@ paths:
               $ref: "#/components/schemas/SignIn"
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/SignInResponse'
         '401':
           description: Authorization information is missing or invalid.
         '5XX':
@@ -340,7 +340,7 @@ paths:
           description: Not Found
         '5XX':
           description: Unexpected error.
-  /shopping/item/{owner_id}:
+  /shopping/{owner_id}:
     get:
       tags:
         - shopping
@@ -355,7 +355,7 @@ paths:
           name : owner_id
           description: オーナーID(所属している家庭単位のID)
           schema:
-            type : integer
+            type : string
           required: true
       responses:
         '200':
@@ -373,7 +373,7 @@ paths:
           name : owner_id
           description: オーナーID(所属している家庭単位のID)
           schema:
-            type : integer
+            type : string
           required: true
       requestBody:
         content:
@@ -407,6 +407,7 @@ paths:
                     type: string
         '401':
           description: Authorization information is missing or invalid.
+  /shopping/{owner_id}/{item_id}:
     delete:
       tags:
         - shopping
@@ -418,18 +419,14 @@ paths:
           name : owner_id
           description: オーナーID(所属している家庭単位のID)
           schema:
+            type : string
+          required: true
+        - in: path
+          name : item_id
+          description: オーナーID(所属している家庭単位のID)
+          schema:
             type : integer
           required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: integer
-                  description: |
-                    買い物メモのID
       responses:
         '200':
           description: OK
@@ -503,7 +500,7 @@ components:
         owner_id:
           type: integer
           nullable: false
-        name:
+        description:
           type: string
           minLength: 10
           maxLength: 255
@@ -521,7 +518,7 @@ components:
       required:
         - id
         - owner_id
-        - name
+        - description
         - category
         - picked
     UserBase:
@@ -650,6 +647,17 @@ components:
         phoneNumber: null
         email: taro@example.com
   responses:
+    SignInResponse:
+      description: successful sign in operation
+      content:
+        application/json:
+          schema:
+            type : object
+            properties:
+              userId: 
+                type: string
+            required:
+              - userId
     GetMe:
       description: successful operation
       content:

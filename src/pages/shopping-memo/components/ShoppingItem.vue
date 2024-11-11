@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { ShoppingPresenter } from '../types';
 import CategoryBadge from './CategoryBadge.vue';
+import type { ShoppingPresenter } from '@/features/shopping/list/types';
 
 const props = defineProps<{
   item: ShoppingPresenter

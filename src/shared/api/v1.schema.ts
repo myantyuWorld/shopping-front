@@ -129,13 +129,7 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
+                200: components["responses"]["SignInResponse"];
                 /** @description Authorization information is missing or invalid. */
                 401: {
                     headers: {
@@ -668,7 +662,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/shopping/item/{owner_id}": {
+    "/shopping/{owner_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -689,7 +683,7 @@ export interface paths {
                 header?: never;
                 path: {
                     /** @description オーナーID(所属している家庭単位のID) */
-                    owner_id: number;
+                    owner_id: string;
                 };
                 cookie?: never;
             };
@@ -717,7 +711,7 @@ export interface paths {
                 header?: never;
                 path: {
                     /** @description オーナーID(所属している家庭単位のID) */
-                    owner_id: number;
+                    owner_id: string;
                 };
                 cookie?: never;
             };
@@ -758,6 +752,22 @@ export interface paths {
                 };
             };
         };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/shopping/{owner_id}/{item_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
         /**
          * 買い物削除API
          * @description 買い物メモを削除します<br/>
@@ -769,19 +779,13 @@ export interface paths {
                 header?: never;
                 path: {
                     /** @description オーナーID(所属している家庭単位のID) */
-                    owner_id: number;
+                    owner_id: string;
+                    /** @description オーナーID(所属している家庭単位のID) */
+                    item_id: number;
                 };
                 cookie?: never;
             };
-            requestBody?: {
-                content: {
-                    "application/json": {
-                        /** @description 買い物メモのID
-                         *      */
-                        id?: number;
-                    };
-                };
-            };
+            requestBody?: never;
             responses: {
                 /** @description OK */
                 200: {
@@ -843,7 +847,7 @@ export interface components {
         GetShoppingItem: {
             id: number;
             owner_id: number;
-            name: string;
+            description: string;
             /**
              * @example food
              * @enum {string}
@@ -884,6 +888,17 @@ export interface components {
         };
     };
     responses: {
+        /** @description successful sign in operation */
+        SignInResponse: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/json": {
+                    userId: string;
+                };
+            };
+        };
         /** @description successful operation */
         GetMe: {
             headers: {
